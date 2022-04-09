@@ -1,5 +1,5 @@
---- xp-pen-pentablet-3.2.0.210804-1.x86_64/install.sh	2021-05-17 08:06:23.000000000 +0200
-+++ patch/install.sh	2021-06-14 11:43:08.834793268 +0200
+--- xp-pen-pentablet-3.2.3.220323-1.x86_64/install.sh	2022-03-23 11:03:14.000000000 +0300
++++ src/xp-pen-pentablet-3.2.3.220323-1.x86_64/install.sh	2022-04-09 13:45:24.693404421 +0300
 @@ -9,6 +9,20 @@
  echo $dirname
  cd "$dirname"
@@ -64,28 +64,36 @@
  
  appDesktopName=xp$AppName.desktop
  appIconName=$AppName.png
-@@ -144,9 +158,9 @@
+@@ -143,15 +157,15 @@
+ 	echo "Cannot find set auto start"
  fi
  
- #Copy config files
--chmod +x /usr/lib/pentablet/pentablet
--chmod +x /usr/lib/pentablet/pentablet.sh
--confPath="/usr/lib/pentablet/conf/xppen"
-+chmod +x "${rootDir}/usr/lib/pentablet/pentablet"
-+chmod +x "${rootDir}/usr/lib/pentablet/pentablet.sh"
-+confPath="${rootDir}/usr/lib/pentablet/conf/xppen"
+-absAppDir=/usr/lib/pentablet
++absAppDir=${rootDir}/usr/lib/pentablet
+ absConfPath=$absAppDir/conf/xppen
+ absLibPath=$absAppDir/lib
+ absPlatPath=$absAppDir/platforms
  
- chmod +0777 $confPath
  
-@@ -162,9 +176,9 @@
- 	chmod +0666 $confPath/name_config.ini
- fi
+-chmod +0777 /etc/xdg/autostart/xppentablet.desktop
+-chmod +0777 /usr/share/applications/xppentablet.desktop
+-chmod +0777 /usr/share/icons/pentablet.png
++chmod +0777 ${rootDir}/etc/xdg/autostart/xppentablet.desktop
++chmod +0777 ${rootDir}/usr/share/applications/xppentablet.desktop
++chmod +0777 ${rootDir}/usr/share/icons/pentablet.png
+ 
+ chmod +0777 $absAppDir/pentablet
+ chmod +0777 $absAppDir/pentablet.sh
+@@ -184,10 +198,10 @@
+ chmod +0666 $lockfile
+ 
  
 -if [ -f "/etc/xdg/autostart/pentablet.desktop" ]; then
 -	rm /etc/xdg/autostart/ugee-pentablet.desktop
 +if [ -f "${rootDir}/etc/xdg/autostart/pentablet.desktop" ]; then
 +	rm "${rootDir}/etc/xdg/autostart/ugee-pentablet.desktop"
  fi
+ 
  
 -echo "Installation successful!"
 +#echo "Installation successful!"
